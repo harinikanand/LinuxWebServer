@@ -225,6 +225,7 @@ Step 13: Setup New OAuth2 keys
    These are related to getting the google login work. This is particularly related to opening the client_secrets.json file.
 
 References:
+===========
 1. https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps
 
 2. http://stackoverflow.com/questions/28184419/pydrive-invalid-client-secrets-file
@@ -264,19 +265,34 @@ Password for grader account is grader.
 
 The following public URLs are supported;
         http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/login - provide a mechanism to login
+
         http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/ - same as the URL 14.3
+
         http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/genres - shows all the genres
+
         http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/genres/<int:genre_id>/ - same as 14.5
+
         http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/genres/<int:genre_id>/list - shows all the books in the genre with genre_id
+
         http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/genres/<int:genre_id>/list/JSON - Shows the JSON output for all the books in a genre with id genre_id
-        http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/genres/<int:genre_id>/list/<int:book_id>/JSON - shows the JSON putput for all book with book_id in the genre genre_id.
+
+        http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/genres/<int:genre_id>/list/<int:book_id>/JSON - shows the JSON putput for all book with book_id in the genre genre_id
+
         http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/genres/JSON - shows the JSON output for all the genres
+
 The following Private URLs are supported:
         http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/genres/new - URL to add a new genre
+
         http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/genres/<int:genre_id>/edit - URL for editing the genre with genre_id
+
         http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/genres/<int:genre_id>/delete - URL for deleting the genre with genre_id
+
         http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/genres/<int:genre_id>/list/new - URL to add new book in genre with id
+
         http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/genres/<int:genre_id>/list/<int:book_id>/edit - URL to edit a book (with book_id) in the genre with genre_id
+
         http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/genres/<int:genre_id>/list/<int:book_id>/delete - URL to delete a book (with book_id) in the genre with genre_id
+
         http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/gconnect - URL for connect to google plus oauth2.0 system to obtain googleplus credentials
+
         http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/gdisconnect - URL for disconnect from google plus oauth2.0 system 
