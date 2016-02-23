@@ -1,3 +1,9 @@
+
+LINUX SERVER CONFIGURATION
+===========================
+Author: Harini Anand
+Date: Feb 22, 2016
+
 Perform Basic Configuration
 =============================
 Step 1:  Launch your Virtual Machine with your Udacity account and log in. Refer to: https://www.udacity.com/account#!/development_environment
@@ -122,16 +128,15 @@ Step 9: Install Git and clone the catalog app from Github
     - In the catalog directory, git clone the catalog app project from Github
        cd /catalog
        git clone https://github.com/harinikanand/CatalogApp.git catalog
-    - In the same directory, create a catalog.wsgi
+    - In the same directory, create a catalog.wsgi with:
      
-            #!/usr/bin/python
-            import sys
-            import logging
-            logging.basicConfig(stream=sys.stderr)
-            sys.path.insert(0,"/var/www/catalog/")
+         #!/usr/bin/python
+         import sys
+         import logging
+         logging.basicConfig(stream=sys.stderr)
+         sys.path.insert(0,"/var/www/catalog/")
 
-            from catalog import app as application
-            application.secret_key = 'Add your secret key'
+         from catalog import app as application
 
 
 Step 10: Install Dependencies
@@ -147,15 +152,15 @@ Step 10: Install Dependencies
      - sudo chmod -R 777 venv
      - pip install Flask
      - pip install bleach httplib2 request oauth2client sqlalchemy 
-     - sudo apt-get install python-psycopg2 (sudo apt-get build-dep python-psycopg2;
-                                             pip install psycopg2)
+     - sudo apt-get build-dep python-psycopg2
+     - pip install psycopg2
   
    
 Step 11: Create, configure and enable a Virtual Host
 
    Performed the following steps to create a virtual host
      sudo \vi /etc/apache2/sites-available/catalog.conf
-         <VirtualHost *:80>
+     <VirtualHost *:80>
     	ServerName 52.10.70.16
     	ServerAlias ec2-52-10-70-16.us-west-2.compute.amazonaws.com
     	ServerAdmin admin@52.10.70.16
@@ -170,11 +175,11 @@ Step 11: Create, configure and enable a Virtual Host
     	<Directory /var/www/catalog/catalog/static/>
        	 	Order allow,deny
         	Allow from all
-   	</Directory>
+   	    </Directory>
     	ErrorLog ${APACHE_LOG_DIR}/error.log
     	LogLevel warn
     	CustomLog ${APACHE_LOG_DIR}/access.log combined
-	</VirtualHost>
+	 </VirtualHost>
     Enabled the virtual Host
         sudo a2ensite catalog
 
@@ -221,20 +226,33 @@ Step 13: Setup New OAuth2 keys
 
 References:
 1. https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps
+
 2. http://stackoverflow.com/questions/28184419/pydrive-invalid-client-secrets-file
+
 3. http://codegur.com/30610894/oauth-attributeerror-str-object-has-no-attribute-access-token
+
 4. http://stackoverflow.com/questions/29565392/error-storing-oauth-credentials-in-session-when-authenticating-with-google
+
 5. https://www.a2hosting.com/kb/developer-corner/apache-web-server/viewing-apache-log-files
+
 6. https://help.ubuntu.com/
+
 7. http://serverfault.com/questions/609947/database-connection-to-postgresql-refused-for-flask-app-under-mod-wsgi-when-star
+
 8. https://blog.openshift.com/build-your-app-on-openshift-using-flask-sqlalchemy-and-postgresql-92/
+
 9. http://docs.evergreen-ils.org/2.2/_configure_the_apache_web_server.html
+
 10. https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-hosts-on-ubuntu-14-04-lts
+
 11. http://dba.stackexchange.com/questions/35316/why-is-a-new-user-allowed-to-create-a-table
+
 12. http://blog.udacity.com/2015/03/step-by-step-guide-install-lamp-linux-apache-mysql-python-ubuntu.html
+
 13. http://killtheyak.com/use-postgresql-with-django-flask/
 
-
+Other details:
+==============
 Public IP Address: 52.10.70.16
 
 PORT: 2200
@@ -244,21 +262,21 @@ Full command: ssh -i ~/.ssh/grader_key grader@52.10.70.16 -p 2200
 
 Password for grader account is grader.
 
-14. The following public URLs are supported;
-        1. http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/login - provide a mechanism to login
-        2. http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/ - same as the URL 14.3
-        3. http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/genres - shows all the genres
-        4. http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/genres/<int:genre_id>/ - same as 14.5
-        5. http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/genres/<int:genre_id>/list - shows all the books in the genre with genre_id
-        6. http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/genres/<int:genre_id>/list/JSON - Shows the JSON output for all the books in a genre with id genre_id
-        7. http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/genres/<int:genre_id>/list/<int:book_id>/JSON - shows the JSON putput for all book with book_id in the genre genre_id.
-         http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/genres/JSON - shows the JSON output for all the genres
-15.  The following Private URLs are supported:
-         http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/genres/new - URL to add a new genre
-         http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/genres/<int:genre_id>/edit - URL for editing the genre with genre_id
-         http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/genres/<int:genre_id>/delete - URL for deleting the genre with genre_id
-         http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/genres/<int:genre_id>/list/new - URL to add new book in genre with id
-         http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/genres/<int:genre_id>/list/<int:book_id>/edit - URL to edit a book (with book_id) in the genre with genre_id
-         http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/genres/<int:genre_id>/list/<int:book_id>/delete - URL to delete a book (with book_id) in the genre with genre_id
-         http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/gconnect - URL for connect to google plus oauth2.0 system to obtain googleplus credentials
-         http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/gdisconnect - URL for disconnect from google plus oauth2.0 system 
+The following public URLs are supported;
+        http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/login - provide a mechanism to login
+        http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/ - same as the URL 14.3
+        http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/genres - shows all the genres
+        http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/genres/<int:genre_id>/ - same as 14.5
+        http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/genres/<int:genre_id>/list - shows all the books in the genre with genre_id
+        http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/genres/<int:genre_id>/list/JSON - Shows the JSON output for all the books in a genre with id genre_id
+        http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/genres/<int:genre_id>/list/<int:book_id>/JSON - shows the JSON putput for all book with book_id in the genre genre_id.
+        http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/genres/JSON - shows the JSON output for all the genres
+The following Private URLs are supported:
+        http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/genres/new - URL to add a new genre
+        http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/genres/<int:genre_id>/edit - URL for editing the genre with genre_id
+        http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/genres/<int:genre_id>/delete - URL for deleting the genre with genre_id
+        http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/genres/<int:genre_id>/list/new - URL to add new book in genre with id
+        http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/genres/<int:genre_id>/list/<int:book_id>/edit - URL to edit a book (with book_id) in the genre with genre_id
+        http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/genres/<int:genre_id>/list/<int:book_id>/delete - URL to delete a book (with book_id) in the genre with genre_id
+        http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/gconnect - URL for connect to google plus oauth2.0 system to obtain googleplus credentials
+        http://ec2-52-10-70-16.us-west-2.compute.amazonaws.com/gdisconnect - URL for disconnect from google plus oauth2.0 system 
